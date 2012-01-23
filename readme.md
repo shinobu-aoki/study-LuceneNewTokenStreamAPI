@@ -3,9 +3,9 @@
 ## Lucene New TokenStream API
 
 http://lucene.apache.org/java/3_5_0/api/core/org/apache/lucene/analysis/package-summary.html#package_description
-ƒy[ƒW‚Ì^‚ñ’†‚ ‚½‚è
+ãƒšãƒ¼ã‚¸ã®çœŸã‚“ä¸­ã‚ãŸã‚Š
 
-## “®‚©‚µ•û
+## å‹•ã‹ã—æ–¹
 
 ```sh
 git clone git://github.com/shinobu_aoki/study-LuceneNewTokenStreamAPI.git
