@@ -1,8 +1,9 @@
 package com.github.shinobu_aoki.studyLucene
 
 import java.io.{Reader,StringReader}
-import org.apache.lucene.analysis.{TokenFilter,TokenStream,Tokenizer}
+import org.apache.lucene.analysis.{TokenFilter,TokenStream,Tokenizer,WhitespaceTokenizer}
 import org.apache.lucene.analysis.tokenattributes.{CharTermAttribute,OffsetAttribute}
+import org.apache.lucene.util.Version
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 
@@ -44,6 +45,15 @@ class NewTokenStreamTest extends Spec with ShouldMatchers {
       val att2 = filter.addAttribute(classOf[OffsetAttribute])
       val att2FromTokenizer = tokenizer.addAttribute(classOf[OffsetAttribute])
       att2.eq(att2FromTokenizer) should be (true)
+    }
+    
+    it ("Attribute instances should be reused for all tokens of a document") {
+      val tokenizer = new WhitespaceTokenizer(Version.LUCENE_35, new StringReader("hoge4 hoge5"))
+      // WhitespaceTokenizerはCharTermAttributeとOffsetAttributeを持っている（実際にはCharTokenizer）
+      val charTermAtt = tokenizer.addAttribute(classOf[CharTermAttribute])
+      while (tokenizer.incrementToken) {
+        tokenizer.getAttribute(classOf[CharTermAttribute]).eq(charTermAtt) should be (true)
+      }
     }
   }
 }
