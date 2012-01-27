@@ -11,7 +11,7 @@ class MyAnalyzerTest1 extends FunSuite with ShouldMatchers {
     val expected = List("This", "is", "a", "demo", "of", "the", "new", "TokenStream", "API")
     val analyzer = new MyAnalyzer1
     val stream = analyzer.tokenStream("field", new StringReader(text))
-    // TokenStreamからTermAttributeを取得(demoのTermAttributeはdeprecated)
+    // TokenStreamからCharTermAttributeを取得(exampleのTermAttributeはdeprecated)
     val termAtt = stream.addAttribute(classOf[CharTermAttribute])
     stream.reset()
     Stream.continually(stream.incrementToken).takeWhile(b => b).map { b =>
