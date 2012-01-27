@@ -49,10 +49,13 @@ class NewTokenStreamTest extends Spec with ShouldMatchers {
     
     it ("Attribute instances should be reused for all tokens of a document") {
       val tokenizer = new WhitespaceTokenizer(Version.LUCENE_35, new StringReader("hoge4 hoge5"))
+      val filter = new EmptyTokenFilter(tokenizer)
       // WhitespaceTokenizerはCharTermAttributeとOffsetAttributeを持っている（実際にはCharTokenizer）
       val charTermAtt = tokenizer.addAttribute(classOf[CharTermAttribute])
       while (tokenizer.incrementToken) {
         tokenizer.getAttribute(classOf[CharTermAttribute]).eq(charTermAtt) should be (true)
+        filter.incrementToken
+        filter.getAttribute(classOf[CharTermAttribute]).eq(charTermAtt) should be (true)
       }
     }
   }
