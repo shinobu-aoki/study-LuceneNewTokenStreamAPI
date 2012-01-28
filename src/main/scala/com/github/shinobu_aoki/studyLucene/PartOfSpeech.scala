@@ -40,7 +40,7 @@ class PartOfSpeechTaggingFilter(input: TokenStream) extends TokenFilter(input) {
   val posAtt = addAttribute(classOf[PartOfSpeechAttribute])
   val termAtt = addAttribute(classOf[CharTermAttribute])
   
-  def incrementToken() = {
+  final def incrementToken() = {
     if (!input.incrementToken()) {
       false
     } else {
