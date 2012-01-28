@@ -22,14 +22,20 @@
     <info
         organisation=""
         module=""
-        status="integration">
-      <dependencies>
-        <dependency org="org.apache.solr" name="solr-solrj" rev="3.5.0"/>
-        <!--<dependency org="org.apache.solr" name="solr-core" rev="3.5.0"/>-->
-        <dependency org="org.apache.lucene" name="lucene-core" rev="3.5.0"/>
-        <dependency org="org.apache.lucene" name="lucene-solr-grandparent" rev="3.5.0"/>
-        <dependency org="org.slf4j" name="slf4j-api" rev="1.6.2"/>
-        <dependency org="org.slf4j" name="slf4j-jdk14" rev="1.6.2"/>
-      </dependencies>
-	</info>
+        status="integration"/>
+    <configurations>
+        <conf name="core"  description="only provide core library"/>
+        <conf name="test" extends="core" visibility="private" description="for testing the library"/>
+        <conf name="scala-lang" visibility="private" description="scala compile and library"/>
+        <conf name="jars" description="Jars released with SOLR distribution"/>
+    </configurations>
+    <dependencies>
+      <dependency org="org.apache.solr" name="solr-solrj" rev="3.5.0"/>
+      <dependency org="org.apache.solr" name="solr-core" rev="3.5.0" conf="jars->default"/>
+      <dependency org="org.apache.lucene" name="lucene-core" rev="3.5.0"/>
+      <dependency org="org.apache.lucene" name="lucene-solr-grandparent" rev="3.5.0"/>
+      <dependency org="org.slf4j" name="slf4j-api" rev="1.6.2"/>
+      <dependency org="org.slf4j" name="slf4j-jdk14" rev="1.6.2"/>
+      <dependency org="org.scalatest" name="scalatest_2.9.1" rev="1.6.1" conf="test->default"/>
+    </dependencies>
 </ivy-module>
