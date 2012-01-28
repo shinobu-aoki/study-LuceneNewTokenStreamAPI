@@ -9,6 +9,7 @@ class MyAnalyzerTest3 extends FunSuite with ShouldMatchers {
   test("test MyAnalyzer3") {
     val text = "This is a demo of the new TokenStream API"
     // 3文字未満の文字列はスキップされるはず
+    import PartOfSpeech._
     val expected = List(("This",Noun,1), ("demo",Unknown,3), ("the",Unknown,2), ("new",Unknown,1), ("TokenStream",Noun,1), ("API",Noun,1))
     val analyzer = new MyAnalyzer3
     val stream = analyzer.tokenStream("field", new StringReader(text))

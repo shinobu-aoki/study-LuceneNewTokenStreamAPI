@@ -34,7 +34,7 @@ class PartOfSpeechTaggingFilter2(input: TokenStream) extends PartOfSpeechTagging
   val offsetAtt = addAttribute(classOf[OffsetAttribute])
   // オフセットが0のものをNounにしない
   override protected def determinePOS(term:Array[Char], offset:Int, length:Int) = 
-    if (offsetAtt.startOffset > 0 && length > 0 && Character.isUpperCase(term(0))) Noun else Unknown
+    if (offsetAtt.startOffset > 0 && length > 0 && Character.isUpperCase(term(0))) PartOfSpeech.Noun else PartOfSpeech.Unknown
 }
 
 class MyAnalyzer4 extends Analyzer {
